@@ -7,9 +7,10 @@ public class PlayerMovement : MonoBehaviour
     public float Speed = 5f;
     public float JumpForce = 2f;
     private Rigidbody2D _rigidbody2D;
-    private float _horizontal, _vertical;
-
+    private float _horizontal;
+    private bool _jumping = false;
     public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,25 +21,28 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         _horizontal = Input.GetAxis("Horizontal");
-        _vertical = Input.GetAxis("Vertical");
 
         if (Input.GetButton("Jump") && Mathf.Abs(_rigidbody2D.velocity.y) == 0)
         {
-            Debug.Log("Jumping");
-            _rigidbody2D.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-            animator.SetBool("Jumping", true);
-        } else
-        {
-            animator.SetBool("Jumping", false);
+            _jumping = true;
         }
 
     }
 
+    // this is called evry time there is a physics update
     private void FixedUpdate()
     {
-        Vector2 dir = new Vector2(_horizontal, 0);
-
         animator.SetFloat("Speed", Mathf.Abs(_horizontal));
+
+        if (_jumping)
+        {
+            _rigidbody2D.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            animator.SetBool("Jumping", true);
+            _jumping = false;
+        } else
+        {
+            animator.SetBool("Jumping", false);
+        }
 
         transform.position += new Vector3(_horizontal, 0, 0) * Time.fixedDeltaTime * Speed;
     }
