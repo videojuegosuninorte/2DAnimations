@@ -47,3 +47,4 @@ public class PlayerMovement : MonoBehaviour
         transform.position += new Vector3(_horizontal, 0, 0) * Time.fixedDeltaTime * Speed;
     }
 }
+
