@@ -32,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
     // this is called evry time there is a physics update
     private void FixedUpdate()
     {
-        animator.SetFloat("Speed", Mathf.Abs(_horizontal));
+        
+        animator.SetFloat("Speed", Mathf.Abs(_horizontal > 0 ? _horizontal : 0));
 
         if (_jumping)
         {
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Jumping", false);
         }
 
-        transform.position += new Vector3(_horizontal, 0, 0) * Time.fixedDeltaTime * Speed;
+        transform.position += new Vector3(_horizontal > 0 ? _horizontal : 0, 0, 0) * Time.fixedDeltaTime * Speed;
     }
 }
 
