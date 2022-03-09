@@ -12,6 +12,7 @@ public class BallMovement : MonoBehaviour
     private bool jumping;
     private bool r,l;
     private bool doubleJump = false;
+    private float initialHeight = 0;
 
 
     private void Awake()
@@ -21,6 +22,7 @@ public class BallMovement : MonoBehaviour
 
     void Start()
     {
+       
         
     }
 
@@ -29,27 +31,10 @@ public class BallMovement : MonoBehaviour
     {
         jumping = true;
 
-        //if (r || l)
-        //{
-        //    if (r)
-        //        rigidbody2D.AddForce(new Vector2(HorizontalForce, JumpForce/2), ForceMode2D.Impulse);
 
-        //    if (l)
-        //        rigidbody2D.AddForce(new Vector2(HorizontalForce*-1, JumpForce/2).normalized, ForceMode2D.Impulse);
-        //    //  rigidbody2D.AddForce(new Vector2(HorizontalForce * -1, 0), ForceMode2D.Force);
-        //    //rigidbody2D.velocity = transform.right * -2;
-        //    //rigidbody2D.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-        //    //  rigidbody2D.AddForce(rigidbody2D.velocity, ForceMode2D.Impulse);
+       
 
-        //    r = false;
-        //    l = false;
-        //} else
-        //{
-        //    rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
-        //    rigidbody2D.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-        //}
 
-        
     }
 
     // Update is called once per frame
