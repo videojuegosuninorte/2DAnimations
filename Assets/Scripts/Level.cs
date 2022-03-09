@@ -21,16 +21,23 @@ public class Level : MonoBehaviour
         {
             MenuManager.Instance.SetScore(level);
             firstCollision = true;
-            if (transform.position.x == -5)
-            {
-                var obj2 = Instantiate(levelPrefab, new Vector3(5, transform.position.y + 3.5f, 0), Quaternion.identity);
-                obj2.SetLevel(level + 1);
 
-            }
-            else
-            {
-                var obj = Instantiate(levelPrefab, new Vector3(-5, transform.position.y + 3.5f, 0), Quaternion.identity);
-                obj.SetLevel(level + 1);
+            if (level == 3) {
+                GameManager.Instance.UpdateGameState(GameManager.GameState.end);
+            } else { 
+
+                if (transform.position.x == -5)
+                {
+                    var obj2 = Instantiate(levelPrefab, new Vector3(5, transform.position.y + 3.5f, 0), Quaternion.identity);
+                    obj2.SetLevel(level + 1);
+
+                }
+                else
+                {
+                    var obj = Instantiate(levelPrefab, new Vector3(-5, transform.position.y + 3.5f, 0), Quaternion.identity);
+                    obj.SetLevel(level + 1);
+
+                }
 
             }
 
