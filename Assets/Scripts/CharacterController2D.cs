@@ -130,8 +130,8 @@ public class CharacterController2D : MonoBehaviour
 			// Add a vertical force to the player.
 			m_Grounded = false;
 			if (doubleJump) {
-				Debug.Log("Apply double jump");
-				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce*1.5f));
+				Debug.Log("Apply double jump!!!!!");
+				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce*0.2f));
 				
 			}
 			else

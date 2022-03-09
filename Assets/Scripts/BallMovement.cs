@@ -73,6 +73,7 @@ public class BallMovement : MonoBehaviour
         if (Input.GetButton("Jump"))
         {
             doubleJump = true;
+            jumping = true;
             Debug.Log("Double jump");
 
         }
