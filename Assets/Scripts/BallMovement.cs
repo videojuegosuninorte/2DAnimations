@@ -19,22 +19,10 @@ public class BallMovement : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
-
-    void Start()
-    {
-       
-        
-    }
-
    
     private void OnCollisionStay2D(Collision2D collision)
     {
         jumping = true;
-
-
-       
-
-
     }
 
     // Update is called once per frame
@@ -44,17 +32,6 @@ public class BallMovement : MonoBehaviour
 
         horizonal = h;
 
-        //if (h > 0)
-        //{
-        //    r = true;
-        //} else
-        //{
-        //    if (h < 0)
-        //    {
-        //        l = true;
-        //    }
-            
-        //}
         if (Input.GetButton("Jump"))
         {
             doubleJump = true;
@@ -76,37 +53,6 @@ public class BallMovement : MonoBehaviour
         doubleJump = false;
         jumping = false;
         JumpForce = 1;
-
-        //if (jumping)
-        //{
-
-        //    if (r)
-        //    {
-        //        //rigidbody2D.AddForce(new Vector2(HorizontalForce, 0), ForceMode2D.Force);
-        //        //transform.Translate(-Vector3.right * 1 * Time.deltaTime);
-        //        //rigidbody2D.velocity = transform.right * 2;
-        //       // rigidbody2D.AddForce(rigidbody2D.velocity, ForceMode2D.Impulse);
-        //        r = false;
-        //    }
-        //    else
-        //    {
-        //        if (l)
-        //        {
-        //            //  rigidbody2D.AddForce(new Vector2(HorizontalForce * -1, 0), ForceMode2D.Force);
-        //            //rigidbody2D.velocity = transform.right * -2;
-        //            //rigidbody2D.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-        //          //  rigidbody2D.AddForce(rigidbody2D.velocity, ForceMode2D.Impulse);
-        //            l = false;
-        //        } else
-        //        {
-        //            //transform.position = Vector2.MoveTowards(transform.position, new Vector2(_startPos.x, transform.position.y) + (Vector2.up * _hightbuf), speed * Time.fixedDeltaTime);
-        //           // rigidbody2D.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-        //        }
-        //    }
-
-        //    jumping = false;
     }
 
-        
-    
 }
