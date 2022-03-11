@@ -18,6 +18,8 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+	private bool doubleJumpPending = false;
+	private bool groundAfterDoubleJump = true;
 
 	[Header("Events")]
 	[Space]
@@ -64,6 +66,20 @@ public class CharacterController2D : MonoBehaviour
 	public void Move(float move, bool crouch, bool jump, bool doubleJump)
 	{
 		// If crouching, check to see if the character can stand up
+		doubleJumpPending = false;
+		//Debug.Log("Move "+ doubleJump + groundAfterDoubleJump);
+		if (doubleJump) {
+			Debug.Log("Apply double jump!!!!!");
+			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 0.1f));
+			groundAfterDoubleJump = false;
+		}
+
+		if (m_Grounded)
+        {
+			groundAfterDoubleJump = true;
+
+		}
+			
 		if (!crouch)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
@@ -129,7 +145,8 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
-			if (doubleJump) {
+			if (doubleJumpPending) {
+				doubleJumpPending = false;
 				Debug.Log("Apply double jump!!!!!");
 				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce*1.2f));
 				

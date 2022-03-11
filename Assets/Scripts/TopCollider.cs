@@ -35,8 +35,8 @@ public class TopCollider : MonoBehaviour
                     var obj2 = Instantiate(levelPrefab, new Vector3(5, transform.position.y + offset, 0), Quaternion.identity);
                     obj2.SetLevel(level + 1);
 
-                    obj2 = Instantiate(levelPrefab, new Vector3(-5, transform.position.y + offset*2, 0), Quaternion.identity);
-                    obj2.SetLevel(level + 2);
+                    //obj2 = Instantiate(levelPrefab, new Vector3(-5, transform.position.y + offset*2, 0), Quaternion.identity);
+                    //obj2.SetLevel(level + 2);
 
                 }
                 else
@@ -44,8 +44,8 @@ public class TopCollider : MonoBehaviour
                     var obj = Instantiate(levelPrefab, new Vector3(-5, transform.position.y + offset, 0), Quaternion.identity);
                     obj.SetLevel(level + 1);
 
-                    obj = Instantiate(levelPrefab, new Vector3(5, transform.position.y + offset * 2, 0), Quaternion.identity);
-                    obj.SetLevel(level + 2);
+                    //obj = Instantiate(levelPrefab, new Vector3(5, transform.position.y + offset * 2, 0), Quaternion.identity);
+                    //obj.SetLevel(level + 2);
 
                 }
 

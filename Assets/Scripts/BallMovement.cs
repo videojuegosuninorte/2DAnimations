@@ -19,11 +19,16 @@ public class BallMovement : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
-   
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         jumping = true;
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    jumping = true;
+    //}
 
     // Update is called once per frame
     void Update()
