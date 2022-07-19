@@ -26,7 +26,8 @@ public class Jump : MonoBehaviour
 
         if (_jumping)
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
+            //GetComponent<Rigidbody2D>().velocity += Vector2.up * jumpVelocity;  // affecting te velocity directly
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);  // using unity´s physics
             _jumping = false;
         }
         transform.position += new Vector3(_horizontal, 0, 0) * Time.fixedDeltaTime * Speed;

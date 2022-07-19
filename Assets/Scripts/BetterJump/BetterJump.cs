@@ -14,13 +14,18 @@ public class BetterJump : MonoBehaviour
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         if (rigidbody2D.velocity.y < 0)
         {
-            rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            //rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+            rigidbody2D.gravityScale = fallMultiplier;
         } else if (rigidbody2D.velocity.y > 0 && !Input.GetButton("Jump")){
-            rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumoMultiplier - 1) * Time.deltaTime;
+            //rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumoMultiplier - 1) * Time.fixedDeltaTime;
+            rigidbody2D.gravityScale = lowJumoMultiplier;
+        } else
+        {
+            rigidbody2D.gravityScale = 1; 
         }
     }
 }
