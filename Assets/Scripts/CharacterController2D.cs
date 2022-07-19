@@ -67,11 +67,17 @@ public class CharacterController2D : MonoBehaviour
 	{
 		// If crouching, check to see if the character can stand up
 		doubleJumpPending = false;
+
+		if (doubleJump && groundAfterDoubleJump)
+			doubleJumpPending = true;
+		else
+			doubleJump = false;
 		//Debug.Log("Move "+ doubleJump + groundAfterDoubleJump);
-		if (doubleJump) {
+		if (doubleJumpPending) {
 			Debug.Log("Apply double jump!!!!!");
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 0.1f));
+			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.3f));
 			groundAfterDoubleJump = false;
+			return;
 		}
 
 		if (m_Grounded)
@@ -144,15 +150,7 @@ public class CharacterController2D : MonoBehaviour
 		//if (jump)
 		{
 			// Add a vertical force to the player.
-			m_Grounded = false;
-			if (doubleJumpPending) {
-				doubleJumpPending = false;
-				Debug.Log("Apply double jump!!!!!");
-				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce*1.2f));
-				
-			}
-			else
-				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		}
 	}
 

@@ -41,7 +41,7 @@ public class BallMovement : MonoBehaviour
         {
             doubleJump = true;
             jumping = true;
-            Debug.Log("Double jump");
+            //Debug.Log("Double jump");
 
         }
     }
@@ -52,7 +52,7 @@ public class BallMovement : MonoBehaviour
 
         if (doubleJump)
         {
-            Debug.Log("Cancel Double jump");
+            //Debug.Log("Cancel Double jump");
         }
 
         doubleJump = false;
