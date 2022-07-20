@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 1248064309}
   - component: {fileID: 1248064314}
   - component: {fileID: 1248064313}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,4 +466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795ea108f7d7f47ceb41dfc18ff19df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpVelocity: 5.42
+  jumpVelocity: 8.8
+  Speed: 5
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
