@@ -55,7 +55,10 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Jumping", false);
         }
 
-        transform.position += new Vector3(_horizontal, 0, 0) * Time.fixedDeltaTime * Speed;
+
+       // transform.position += new Vector3(_horizontal, 0, 0) * Time.fixedDeltaTime * Speed;
+
+       transform.Translate(new Vector3(_horizontal, 0, 0) * Time.fixedDeltaTime * Speed);
     }
 
     private void Flip()
