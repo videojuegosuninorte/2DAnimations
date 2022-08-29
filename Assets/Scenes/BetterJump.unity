@@ -447,13 +447,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248064308}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 810d590c59a424ebb9996aa49db4e052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fallMultiplier: 2.5
-  lowJumoMultiplier: 2
+  lowJumpMultiplier: 2
 --- !u!114 &1248064314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,3 +471,5 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
