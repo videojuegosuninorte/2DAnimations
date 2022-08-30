@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //https://www.youtube.com/watch?v=7KiK0Aqtmzc&t=633s
-public class Jump : MonoBehaviour
+public class JumpVelocity : MonoBehaviour
 {
     [Range(1,10)]
     public float jumpVelocity;
@@ -32,8 +32,6 @@ public class Jump : MonoBehaviour
     void Update()
     {
         _horizontal = Input.GetAxis("Horizontal");
-
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _jumping = true;
@@ -42,14 +40,17 @@ public class Jump : MonoBehaviour
         _grounded = GetComponent<CircleCollider2D>().IsTouchingLayers(mask);
         if (!_grounded)
         {
+            //Debug.Log("not grounded");
             _jumping = false;
             if (rigidbody2D.velocity.y < 0)
             {
-               rigidbody2D.gravityScale = fallMultiplier;
+                //rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+                rigidbody2D.gravityScale = fallMultiplier;
                 Debug.Log("Down gravity");
             }
             else if (rigidbody2D.velocity.y > 0 && !Input.GetButton("Jump"))
             {
+                //rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumoMultiplier - 1) * Time.fixedDeltaTime;
                 rigidbody2D.gravityScale = lowJumpMultiplier;
                 Debug.Log("Up gravity");
             }
@@ -61,11 +62,6 @@ public class Jump : MonoBehaviour
         }
     }
 
-    public float JumpForceThingyCalculator(float wantedHeight, float weight, float g)
-    {
-        return weight * Mathf.Sqrt(-2 * wantedHeight *  g);
-    }
-
     private void FixedUpdate()
     {
         Debug.Log("_jumping " + _jumping + "velocity " + rigidbody2D.velocity.y);
@@ -73,8 +69,13 @@ public class Jump : MonoBehaviour
 
         if (_jumping)
         {
-            float requieredForce = JumpForceThingyCalculator(jumpHeight, rigidbody2D.mass, Physics2D.gravity.y * rigidbody2D.gravityScale) * jumpVelocity;
-            rigidbody2D.AddForce(new Vector2(0, requieredForce), ForceMode2D.Impulse);  // using unity´s physics
+            //GetComponent<Rigidbody2D>().velocity += Vector2.up * jumpVelocity;  // affecting te velocity directly
+            float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidbody2D.gravityScale)) * jumpVelocity;
+           // Debug.Log("jumpForce "+ jumpForce+
+           //     " gravityScale " + rigidbody2D.gravityScale +
+           //     " Physics2D.gravity.y "+ Physics2D.gravity.y +
+           //     " jumpHeight" + jumpHeight);
+            rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);  // using unity´s physics
             _jumping = false;
             _grounded = false;
         }
