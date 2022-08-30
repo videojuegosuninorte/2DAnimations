@@ -12,16 +12,16 @@ public class Jump : MonoBehaviour
     private float _horizontal;
     private bool _jumping = false;
     private bool _grounded;
-    private float jumpTime;
     private float jumpHeight = 1;  // thge height of the player
     private Rigidbody2D rigidbody2D;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
-
+    
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
 
+        // get the size of the gameObject
         var p1 = gameObject.transform.TransformPoint(0, 0, 0);
         var p2 = gameObject.transform.TransformPoint(1, 1, 0);
         var w = p2.x - p1.x;
@@ -32,16 +32,10 @@ public class Jump : MonoBehaviour
     void Update()
     {
         _horizontal = Input.GetAxis("Horizontal");
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _jumping = true;
-            jumpTime = 0;
-
         }
-    }
-
-    private void FixedUpdate()
-    {
 
         _grounded = GetComponent<CircleCollider2D>().IsTouchingLayers(mask);
         if (!_grounded)
@@ -60,23 +54,32 @@ public class Jump : MonoBehaviour
                 rigidbody2D.gravityScale = lowJumpMultiplier;
                 Debug.Log("Up gravity");
             }
-        } else
+        }
+        else
         {
             //Debug.Log("grounded");
             rigidbody2D.gravityScale = 1;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        Debug.Log("_jumping " + _jumping + "velocity " + rigidbody2D.velocity.y);
+        
+
         if (_jumping)
         {
             //GetComponent<Rigidbody2D>().velocity += Vector2.up * jumpVelocity;  // affecting te velocity directly
-            float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidbody2D.gravityScale));
-            Debug.Log("jumpForce "+ jumpForce+
-                " gravityScale " + rigidbody2D.gravityScale +
-                " Physics2D.gravity.y "+ Physics2D.gravity.y +
-                " jumpHeight" + jumpHeight);
+            float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidbody2D.gravityScale)) * jumpVelocity;
+           // Debug.Log("jumpForce "+ jumpForce+
+           //     " gravityScale " + rigidbody2D.gravityScale +
+           //     " Physics2D.gravity.y "+ Physics2D.gravity.y +
+           //     " jumpHeight" + jumpHeight);
             rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);  // using unity´s physics
             _jumping = false;
             _grounded = false;
-        } 
+        }
+        
         transform.position += new Vector3(_horizontal, 0, 0) * Time.fixedDeltaTime * Speed;
     }
 }

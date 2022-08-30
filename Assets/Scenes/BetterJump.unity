@@ -329,7 +329,6 @@ GameObject:
   - component: {fileID: 1248064310}
   - component: {fileID: 1248064309}
   - component: {fileID: 1248064314}
-  - component: {fileID: 1248064313}
   m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
@@ -440,20 +439,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1248064313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248064308}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 810d590c59a424ebb9996aa49db4e052, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
 --- !u!114 &1248064314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,10 +451,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795ea108f7d7f47ceb41dfc18ff19df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpVelocity: 8.8
-  Speed: 5
+  jumpVelocity: 2
+  Speed: 10
   mask:
     serializedVersion: 2
     m_Bits: 1
-  fallMultiplier: 2.5
+  fallMultiplier: 3.5
   lowJumpMultiplier: 2
