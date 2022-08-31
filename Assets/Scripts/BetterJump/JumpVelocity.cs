@@ -32,6 +32,11 @@ public class JumpVelocity : MonoBehaviour
     void Update()
     {
         _horizontal = Input.GetAxis("Horizontal");
+
+        if (_horizontal != 0)
+        {
+            Debug.Log("Getting horizontal movement " + _horizontal);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _jumping = true;
@@ -44,22 +49,21 @@ public class JumpVelocity : MonoBehaviour
             _jumping = false;
             if (rigidbody2D.velocity.y < 0)
             {
-                //rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-                rigidbody2D.gravityScale = fallMultiplier;
+                rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+                
                 Debug.Log("Down gravity");
             }
             else if (rigidbody2D.velocity.y > 0 && !Input.GetButton("Jump"))
             {
-                //rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumoMultiplier - 1) * Time.fixedDeltaTime;
-                rigidbody2D.gravityScale = lowJumpMultiplier;
+                rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
                 Debug.Log("Up gravity");
             }
         }
-        else
-        {
-            //Debug.Log("grounded");
-            rigidbody2D.gravityScale = 1;
-        }
+    }
+
+    public float JumpForceThingyCalculator(float wantedHeight, float weight, float g)
+    {
+        return weight * Mathf.Sqrt(-2 * wantedHeight * g);
     }
 
     private void FixedUpdate()
@@ -69,13 +73,9 @@ public class JumpVelocity : MonoBehaviour
 
         if (_jumping)
         {
-            //GetComponent<Rigidbody2D>().velocity += Vector2.up * jumpVelocity;  // affecting te velocity directly
-            float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidbody2D.gravityScale)) * jumpVelocity;
-           // Debug.Log("jumpForce "+ jumpForce+
-           //     " gravityScale " + rigidbody2D.gravityScale +
-           //     " Physics2D.gravity.y "+ Physics2D.gravity.y +
-           //     " jumpHeight" + jumpHeight);
-            rigidbody2D.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);  // using unity´s physics
+            
+            float requieredForce = JumpForceThingyCalculator(jumpHeight, rigidbody2D.mass, Physics2D.gravity.y * rigidbody2D.gravityScale) * jumpVelocity;
+            GetComponent<Rigidbody2D>().velocity += Vector2.up * requieredForce;  // affecting te velocity directly
             _jumping = false;
             _grounded = false;
         }

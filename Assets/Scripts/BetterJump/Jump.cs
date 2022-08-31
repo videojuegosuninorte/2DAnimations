@@ -40,6 +40,8 @@ public class Jump : MonoBehaviour
         }
 
         _grounded = GetComponent<CircleCollider2D>().IsTouchingLayers(mask);
+
+
         if (!_grounded)
         {
             _jumping = false;
